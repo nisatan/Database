@@ -1,0 +1,94 @@
+import 'package:flutter/material.dart';
+void main() => runApp(App());
+
+class App extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter penyimpanan data',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('2018020616-6SIA6'),
+        ),
+        body: Salon(),
+      ),
+    );
+  }
+}
+
+class Salon{
+  
+  String anak;
+  String remaja;
+  String dewasa;
+  
+  
+  TARIFSalon({ this.anak, this.remaja, this.dewasa});
+  
+}
+
+// class Salon
+class Salon extends StatefulWidget {
+  _MyappState createState() => _MyappState();
+}
+
+class _MyappState extends State<Salon> {
+  //deklarasi variabel
+  final txtmurah = TextEditingController();
+  final txtnormal = TextEditingController();
+  final txtmahal = TextEditingController();
+  
+
+  List<Widget> data = [];
+
+  onTambah() {
+    setState(() {
+      data.add(ListTile(
+        leading: Text(txtanak.text),
+        title: Text(txtremaja.text),
+        subtitle: Text(txtdewasa.text),
+        trailing: Text(txtpilihan.text),
+      ));
+      txtanak.clear();
+      txtremaja.clear();
+      txtdewasa.clear();
+      txtpilihan.clear();
+    });
+  }
+
+  Widget build(BuildContext context) {
+    return ListView(
+      children: <Widget>[
+        new Container(
+          padding: EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+           
+              TextField(
+                controller: txtanak,
+                decoration: InputDecoration(hintText: 'anak'),
+              ),
+              TextField(
+                controller: txtremaja,
+                decoration: InputDecoration(hintText: 'remaja'),
+              ),
+              TextField(
+                controller: txtdewasa,
+                decoration: InputDecoration(hintText: 'dewasa'),
+              ),
+               TextField(
+                controller: txtpilihan,
+                decoration: InputDecoration(hintText: 'pilihan'),
+              ),
+              Divider(height: 5.0),
+              ElevatedButton(child: Text("Tambah"), onPressed: onTambah),
+            ],
+          ),
+        ),
+        new Column(
+          children: data,
+        )
+      ],
+    );
+  }
+}
